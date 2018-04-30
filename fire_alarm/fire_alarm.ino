@@ -1,13 +1,14 @@
 #include "Arduino.h"
-#include "WString.h"
 #include "Configurator.h"
 
+AlarmConfiguration alarmConfiguration;
+
 void setup() {
-	Serial.begin(9600);
-	Serial1.begin(9600);
+	Serial.begin(9600);     //console
+	Serial1.begin(9600);   //bluetooth
 
 	Configurator configurator;
-	configurator.configureAlarm();
+	alarmConfiguration = configurator.configureAlarm();
 
 }
 

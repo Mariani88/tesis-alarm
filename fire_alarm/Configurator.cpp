@@ -8,6 +8,8 @@ Configurator::Configurator() {
 
 AlarmConfiguration Configurator::configureAlarm() {
 
+	AlarmConfiguration alarmConfiguration;
+
 	while (true) {
 		if (Serial1.available()) {
 			DynamicJsonBuffer jsonBuffer(512);
@@ -39,7 +41,7 @@ AlarmConfiguration Configurator::configureAlarm() {
 		}
 	}
 
-	return AlarmConfiguration();
+	return alarmConfiguration;
 }
 
 Configurator::~Configurator() {

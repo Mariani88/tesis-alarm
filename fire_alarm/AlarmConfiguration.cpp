@@ -1,9 +1,3 @@
-/*
- * AlarmConfiguration.cpp
- *
- *  Created on: Apr 30, 2018
- *      Author: matias
- */
 
 #include "AlarmConfiguration.h"
 
