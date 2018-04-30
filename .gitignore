@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+/.metadata/
+
+#sloeber
+/RemoteSystemsTempFiles
