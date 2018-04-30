@@ -41,5 +41,10 @@
 			<type>2</type>
 			<locationURI>ECLIPSE_HOME/arduinoPlugin/packages/arduino/hardware/avr/1.6.21/variants/mega</locationURI>
 		</link>
+		<link>
+			<name>libraries/ArduinoJson</name>
+			<type>2</type>
+			<location>/home/matias/Arduino/libraries/ArduinoJson</location>
+		</link>
 	</linkedResources>
 </projectDescription>
