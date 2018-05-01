@@ -1,5 +1,4 @@
 #include "Visor.h"
-#include "Arduino.h"
 
 Visor::Visor(LiquidCrystal_I2C *lcd) {
 	this->lcd = lcd;

@@ -1,7 +1,6 @@
 #include "Configurator.h"
 #include "ConfigurationType.h"
 #include "Coordinate.h"
-#include "Arduino.h"
 
 Configurator::Configurator(Visor* visor) {
 	this->visor = visor;
@@ -22,7 +21,6 @@ AlarmConfiguration Configurator::configureAlarm() {
 				Serial.println(action);
 				Serial.println(ssid);
 				Serial.println(password);
-				delay(100);
 				WifiNetwork wifiNetwork(ssid, password);
 				alarmConfiguration.setWifiNetwork(&wifiNetwork);
 				visor->reportWifiConfigured();
