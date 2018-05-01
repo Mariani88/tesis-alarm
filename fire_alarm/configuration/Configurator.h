@@ -5,13 +5,15 @@
 #include "HardwareSerial.h"
 #include "ArduinoJson.h"
 #include "../Visor.h"
+#include "../Buzzer.h"
 
 class Configurator {
 
 	Visor *visor;
+	Buzzer* buzzer;
 
 public:
-	Configurator(Visor* visor);
+	Configurator(Visor* visor, Buzzer *buzzer);
 	virtual ~Configurator();
 
 	AlarmConfiguration configureAlarm();
