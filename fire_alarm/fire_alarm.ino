@@ -1,5 +1,5 @@
 #include "Arduino.h"
-#include "Configurator.h"
+#include "configuration/Configurator.h"
 
 AlarmConfiguration alarmConfiguration;
 

@@ -3,3 +3,4 @@
 /sources.mk
 /subdir.mk
 /objects.mk
+/configuration/
