@@ -1,12 +1,27 @@
-
 #include "AlarmConfiguration.h"
 
-AlarmConfiguration::AlarmConfiguration() {
-	// TODO Auto-generated constructor stub
+bool wifiConfigurated;
+bool locationConfigured;
 
+AlarmConfiguration::AlarmConfiguration(){
+	this->wifiNetwork = NULL;
+	this->location = NULL;
+}
+
+bool AlarmConfiguration::isCompleted() {
+	return wifiConfigurated && locationConfigured;
+}
+
+void AlarmConfiguration::setWifiNetwork(WifiNetwork* wifiNetwork) {
+	this->wifiNetwork = wifiNetwork;
+	wifiConfigurated = true;
+}
+
+void AlarmConfiguration::setLocation(Location* location) {
+	this->location = location;
+	locationConfigured = true;
 }
 
 AlarmConfiguration::~AlarmConfiguration() {
-	// TODO Auto-generated destructor stub
-}
 
+}

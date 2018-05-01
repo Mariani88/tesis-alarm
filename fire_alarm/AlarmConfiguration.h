@@ -1,24 +1,23 @@
-/*
- * AlarmConfiguration.h
- *
- *  Created on: Apr 30, 2018
- *      Author: matias
- */
-
 #ifndef ALARMCONFIGURATION_H_
 #define ALARMCONFIGURATION_H_
 
+#include "WifiNetwork.h"
+#include "Location.h"
+
 class AlarmConfiguration {
+
+	WifiNetwork* wifiNetwork;
+	Location* location;
+
 public:
 	AlarmConfiguration();
 	virtual ~AlarmConfiguration();
 
 	bool isCompleted();
 
-	void setWifiNetwork();
+	void setWifiNetwork(WifiNetwork* wifiNetwork);
 
-	void setLocation();
-
+	void setLocation(Location* location);
 
 };
 

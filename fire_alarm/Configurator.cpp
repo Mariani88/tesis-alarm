@@ -1,6 +1,6 @@
 #include "Configurator.h"
-#include "ArduinoJson.h"
 #include "ConfigurationType.h"
+#include "Coordinate.h"
 
 Configurator::Configurator() {
 
@@ -10,7 +10,7 @@ AlarmConfiguration Configurator::configureAlarm() {
 
 	AlarmConfiguration alarmConfiguration;
 
-	while (true) {
+	while (!alarmConfiguration.isCompleted()) {
 		if (Serial1.available()) {
 			DynamicJsonBuffer jsonBuffer(512);
 			String message = Serial1.readString();
@@ -24,26 +24,44 @@ AlarmConfiguration Configurator::configureAlarm() {
 				Serial.println(action);
 				Serial.println(ssid);
 				Serial.println(password);
+				alarmConfiguration.setWifiNetwork(&WifiNetwork(ssid, password));
 			}
 
 			if (action.equals(SET_LOCATION)) {
-				int degree = root["latitude"]["degree"];
-				int minute = root["latitude"]["minute"];
-				String second = root["latitude"]["second"];
-				String cardinalPoint = root["latitude"]["cardinal_point"];
 
-				Serial.println(action);
-				Serial.println(degree);
-				Serial.println(minute);
-				Serial.println(second);
-				Serial.println(cardinalPoint);
+				Coordinate latitude = deserializeCoordinate(root["latitude"]);
+				Coordinate longitude = deserializeCoordinate(root["longitude"]);
+				/*int degree = root["latitude"]["degree"];
+				 int minute = root["latitude"]["minute"];
+				 String second = root["latitude"]["second"];
+				 String cardinalPoint = root["latitude"]["cardinal_point"];
+
+				 Serial.println(action);
+				 Serial.println(degree);
+				 Serial.println(minute);
+				 Serial.println(second);
+				 Serial.println(cardinalPoint);*/
+				alarmConfiguration.setLocation(&Location(&latitude, &longitude));
 			}
 		}
 	}
 
+	Serial.println("ALARM CONFIGURED");
 	return alarmConfiguration;
 }
 
 Configurator::~Configurator() {
 	// TODO Auto-generated destructor stub
+}
+
+Coordinate Configurator::deserializeCoordinate(JsonObject& coordinateJson) {
+	int degree = coordinateJson["degree"];
+	int minute = coordinateJson["minute"];
+	String second = coordinateJson["second"];
+	String cardinalPoint = coordinateJson["cardinal_point"];
+	Serial.println(degree);
+	Serial.println(minute);
+	Serial.println(second);
+	Serial.println(cardinalPoint);
+	return Coordinate(degree, minute, second, cardinalPoint);
 }

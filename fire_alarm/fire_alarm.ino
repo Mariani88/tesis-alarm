@@ -9,7 +9,7 @@ void setup() {
 
 	Configurator configurator;
 	alarmConfiguration = configurator.configureAlarm();
-
+	Serial.println(alarmConfiguration.isCompleted());
 }
 
 void loop() {

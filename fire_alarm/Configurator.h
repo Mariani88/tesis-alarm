@@ -3,6 +3,7 @@
 #define CONFIGURATOR_H_
 #include "AlarmConfiguration.h"
 #include "HardwareSerial.h"
+#include "ArduinoJson.h"
 
 class Configurator {
 
@@ -11,6 +12,10 @@ public:
 	virtual ~Configurator();
 
 	AlarmConfiguration configureAlarm();
+
+private:
+	Coordinate deserializeCoordinate(JsonObject& coordinateJson);
+
 };
 
 #endif /* CONFIGURATOR_H_ */
