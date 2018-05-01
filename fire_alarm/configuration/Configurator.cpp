@@ -1,9 +1,10 @@
 #include "Configurator.h"
 #include "ConfigurationType.h"
 #include "Coordinate.h"
+#include "Arduino.h"
 
-Configurator::Configurator() {
-
+Configurator::Configurator(Visor* visor) {
+	this->visor = visor;
 }
 
 AlarmConfiguration Configurator::configureAlarm() {
@@ -12,46 +13,42 @@ AlarmConfiguration Configurator::configureAlarm() {
 
 	while (!alarmConfiguration.isCompleted()) {
 		if (Serial1.available()) {
-			DynamicJsonBuffer jsonBuffer(512);
-			String message = Serial1.readString();
-			Serial.println(message);
-			JsonObject& root = jsonBuffer.parseObject(message);
-			String action = root["action"];
+			JsonObject& jsonMessage = deserializeMessage(Serial1.readString());
+			String action = jsonMessage["action"];
 
 			if (action.equals(CONNECT)) {
-				String ssid = root["ssid"];
-				String password = root["password"];
+				String ssid = jsonMessage["ssid"];
+				String password = jsonMessage["password"];
 				Serial.println(action);
 				Serial.println(ssid);
 				Serial.println(password);
-				alarmConfiguration.setWifiNetwork(&WifiNetwork(ssid, password));
+				delay(100);
+				WifiNetwork wifiNetwork(ssid, password);
+				alarmConfiguration.setWifiNetwork(&wifiNetwork);
+				visor->reportWifiConfigured();
 			}
 
 			if (action.equals(SET_LOCATION)) {
-
-				Coordinate latitude = deserializeCoordinate(root["latitude"]);
-				Coordinate longitude = deserializeCoordinate(root["longitude"]);
-				/*int degree = root["latitude"]["degree"];
-				 int minute = root["latitude"]["minute"];
-				 String second = root["latitude"]["second"];
-				 String cardinalPoint = root["latitude"]["cardinal_point"];
-
-				 Serial.println(action);
-				 Serial.println(degree);
-				 Serial.println(minute);
-				 Serial.println(second);
-				 Serial.println(cardinalPoint);*/
-				alarmConfiguration.setLocation(&Location(&latitude, &longitude));
+				Coordinate latitude = deserializeCoordinate(
+						jsonMessage["latitude"]);
+				Coordinate longitude = deserializeCoordinate(
+						jsonMessage["longitude"]);
+				Location location(&latitude, &longitude);
+				alarmConfiguration.setLocation(&location);
+				visor->reportLocationConfigured();
 			}
 		}
 	}
 
 	Serial.println("ALARM CONFIGURED");
+	visor->reportAlarmConfigured();
 	return alarmConfiguration;
 }
 
-Configurator::~Configurator() {
-	// TODO Auto-generated destructor stub
+JsonObject& Configurator::deserializeMessage(String message) {
+	DynamicJsonBuffer jsonBuffer(512);
+	Serial.println(message);
+	return jsonBuffer.parseObject(message);
 }
 
 Coordinate Configurator::deserializeCoordinate(JsonObject& coordinateJson) {
@@ -64,4 +61,7 @@ Coordinate Configurator::deserializeCoordinate(JsonObject& coordinateJson) {
 	Serial.println(second);
 	Serial.println(cardinalPoint);
 	return Coordinate(degree, minute, second, cardinalPoint);
+}
+
+Configurator::~Configurator() {
 }
