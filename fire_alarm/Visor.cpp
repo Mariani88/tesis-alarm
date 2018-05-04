@@ -28,6 +28,16 @@ void Visor::reportOffLine(){
 	lcd->print("Location offline");
 }
 
+void Visor::reportErrorConnection(){
+	lcd->setCursor(0,0);
+	lcd->print("Wifi not connect");
+}
+
+void Visor::reportConnecting(){
+	lcd->setCursor(0,0);
+	lcd->print("Connecting...   ");
+}
+
 Visor::~Visor() {
 
 }

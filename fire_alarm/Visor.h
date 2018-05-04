@@ -18,6 +18,10 @@ public:
 
 	void reportOffLine();
 
+	void reportErrorConnection();
+
+	void reportConnecting();
+
 	virtual ~Visor();
 };
 

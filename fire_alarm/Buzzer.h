@@ -15,6 +15,8 @@ public:
 
 	void alarmOnline();
 
+	void configurationError();
+
 	virtual ~Buzzer();
 
 private:

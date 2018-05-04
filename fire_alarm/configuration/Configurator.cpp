@@ -2,9 +2,11 @@
 #include "ConfigurationType.h"
 #include "Coordinate.h"
 
-Configurator::Configurator(Visor* visor, Buzzer* buzzer) {
+Configurator::Configurator(Visor* visor, Buzzer* buzzer,
+		ConnectionTask* connectionTask) {
 	this->visor = visor;
 	this->buzzer = buzzer;
+	this->connectionTask = connectionTask;
 }
 
 AlarmConfiguration Configurator::configureAlarm() {
@@ -22,10 +24,19 @@ AlarmConfiguration Configurator::configureAlarm() {
 				Serial.println(action);
 				Serial.println(ssid);
 				Serial.println(password);
+				delay(100);
 				WifiNetwork wifiNetwork(ssid, password);
-				alarmConfiguration.setWifiNetwork(&wifiNetwork);
-				visor->reportWifiConfigured();
-				buzzer->correctConfiguration();
+
+				bool connected = connectionTask->connectToWifi(&wifiNetwork);
+
+				if (connected) {
+					alarmConfiguration.setWifiNetwork(&wifiNetwork);
+					visor->reportWifiConfigured();
+					buzzer->correctConfiguration();
+				}else{
+					visor->reportErrorConnection();
+					buzzer->configurationError();
+				}
 			}
 
 			if (action.equals(SET_LOCATION)) {

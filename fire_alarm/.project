@@ -52,6 +52,11 @@
 			<location>/home/matias/Arduino/libraries/LiquidCrystal_I2C</location>
 		</link>
 		<link>
+			<name>libraries/WiFiEsp</name>
+			<type>2</type>
+			<location>/home/matias/Arduino/libraries/WiFiEsp</location>
+		</link>
+		<link>
 			<name>libraries/Wire</name>
 			<type>2</type>
 			<locationURI>ECLIPSE_HOME/arduinoPlugin/packages/arduino/hardware/avr/1.6.21/libraries/Wire</locationURI>

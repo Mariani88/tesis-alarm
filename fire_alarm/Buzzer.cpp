@@ -14,6 +14,12 @@ void Buzzer::alarmOnline() {
 	playSound(9000, 500, 200);
 }
 
+void Buzzer::configurationError(){
+	playSound(2000, 1000, 1000);
+	playSound(2000, 1000, 1000);
+	playSound(2000, 1000, 1000);
+}
+
 void Buzzer::playSound(int frequence, int delayMillis, int duration) {
 	tone(buzzerPin, frequence, duration);
 	delay(delayMillis);

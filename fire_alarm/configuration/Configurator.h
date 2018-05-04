@@ -6,14 +6,15 @@
 #include "ArduinoJson.h"
 #include "../Visor.h"
 #include "../Buzzer.h"
+#include "../connection/ConnectionTask.h"
 
 class Configurator {
-
 	Visor *visor;
 	Buzzer* buzzer;
+	ConnectionTask* connectionTask;
 
 public:
-	Configurator(Visor* visor, Buzzer *buzzer);
+	Configurator(Visor* visor, Buzzer *buzzer, ConnectionTask* connectioTask);
 	virtual ~Configurator();
 
 	AlarmConfiguration configureAlarm();

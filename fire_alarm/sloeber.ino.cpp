@@ -2,13 +2,14 @@
 //This is a automatic generated file
 //Please do not modify this file
 //If you touch this file your change will be overwritten during the next build
-//This file has been generated on 2018-05-01 18:27:34
+//This file has been generated on 2018-05-03 22:43:34
 
 #include "Arduino.h"
 #include "Arduino.h"
 #include "configuration/Configurator.h"
 #include "Visor.h"
 #include "Buzzer.h"
+#include "connection/ConnectionTask.h"
 
 void setup() ;
 void loop() ;
