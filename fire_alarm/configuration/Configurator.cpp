@@ -1,5 +1,5 @@
 #include "Configurator.h"
-#include "ConfigurationType.h"
+#include "ActionType.h"
 #include "Coordinate.h"
 
 Configurator::Configurator(Visor* visor, Buzzer* buzzer,
