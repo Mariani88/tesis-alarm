@@ -7,6 +7,7 @@
 #include "sensor/SmokeSensor.h"
 #include "EnvironmentMonitorTask.h"
 #include "sensor/TemperatureSensor.h"
+#include "DeliveryTask.h"
 
 const int flameDI = 41;
 const int flameAI = A10;
@@ -22,6 +23,7 @@ TemperatureSensor* temperatureSensor;
 Buzzer* buzzer;
 Visor* visor;
 EnvironmentMonitorTask* environmentMonitorTask;
+DeliveryTask deliveryTask;
 
 void setup() {
 	flameSensor = new FlameSensor(flameAI, flameDI);
@@ -41,17 +43,19 @@ void setup() {
 	ConnectionTask connectionTask(visor);
 
 	Configurator configurator(visor, buzzer, &connectionTask);
-	//alarmConfiguration = configurator.configureAlarm();
-	//Serial.println(alarmConfiguration.isCompleted());
+	alarmConfiguration = configurator.configureAlarm();
+	Serial.println(alarmConfiguration.isCompleted());
 }
 
 void loop() {
-
 	Environment environment =
 			environmentMonitorTask->obtainEnvironmentVariables();
-
 	logEnvironmentVariables(environment);
+
+	deliveryTask.sendAlert(environment);
+
 	delay(5000);
+
 
 }
 
