@@ -20,6 +20,10 @@ void Buzzer::configurationError(){
 	playSound(2000, 1000, 1000);
 }
 
+void Buzzer::fireDetected(){
+	playSound(3000, 100, 500);
+}
+
 void Buzzer::playSound(int frequence, int delayMillis, int duration) {
 	tone(buzzerPin, frequence, duration);
 	delay(delayMillis);

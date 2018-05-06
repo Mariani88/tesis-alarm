@@ -47,9 +47,19 @@
 			<location>/home/matias/Arduino/libraries/ArduinoJson</location>
 		</link>
 		<link>
+			<name>libraries/DallasTemperature</name>
+			<type>2</type>
+			<location>/home/matias/Arduino/libraries/DallasTemperature</location>
+		</link>
+		<link>
 			<name>libraries/LiquidCrystal_I2C</name>
 			<type>2</type>
 			<location>/home/matias/Arduino/libraries/LiquidCrystal_I2C</location>
+		</link>
+		<link>
+			<name>libraries/MAX31850_OneWire</name>
+			<type>2</type>
+			<location>/home/matias/Arduino/libraries/MAX31850_OneWire</location>
 		</link>
 		<link>
 			<name>libraries/WiFiEsp</name>

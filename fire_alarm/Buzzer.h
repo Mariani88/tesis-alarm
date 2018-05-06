@@ -17,6 +17,8 @@ public:
 
 	void configurationError();
 
+	void fireDetected();
+
 	virtual ~Buzzer();
 
 private:
