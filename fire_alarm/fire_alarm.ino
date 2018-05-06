@@ -47,23 +47,24 @@ void setup() {
 
 void loop() {
 
-	Environment environment = environmentMonitorTask->obtainEnvironmentVariables();
+	Environment environment =
+			environmentMonitorTask->obtainEnvironmentVariables();
 
+	logEnvironmentVariables(environment);
+	delay(5000);
+
+}
+
+void logEnvironmentVariables(const Environment& environment) {
 	Serial.print("gas:");
 	Serial.println(environment.getGas());
-
 	Serial.print("temperature:");
 	Serial.println(environment.getTemperature());
-
 	Serial.print("fire detected:");
 	Serial.println(environment.isDetectFire());
-
 	Serial.print("smoke detected:");
 	Serial.println(environment.isDetectSmoke());
 	Serial.println();
 	Serial.println("**************************************************");
-
-	delay(5000);
-
 }
 
