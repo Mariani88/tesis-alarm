@@ -17,10 +17,10 @@ public:
 	Configurator(Visor* visor, Buzzer *buzzer, ConnectionTask* connectioTask);
 	virtual ~Configurator();
 
-	AlarmConfiguration configureAlarm();
+	AlarmConfiguration* configureAlarm();
 
 private:
-	Coordinate deserializeCoordinate(JsonObject& coordinateJson);
+	Coordinate* deserializeCoordinate(JsonObject& coordinateJson);
 	JsonObject& deserializeMessage(String message);
 };
 

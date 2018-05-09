@@ -16,7 +16,7 @@ const int smokeAI = A11;
 const int smokeDI = 39;
 const int temperaturePin = A0;
 
-AlarmConfiguration alarmConfiguration;
+AlarmConfiguration* alarmConfiguration;
 FlameSensor* flameSensor;
 SmokeSensor* smokeSensor;
 TemperatureSensor* temperatureSensor;
@@ -44,18 +44,36 @@ void setup() {
 
 	Configurator configurator(visor, buzzer, &connectionTask);
 	alarmConfiguration = configurator.configureAlarm();
-	Serial.println(alarmConfiguration.isCompleted());
+	Serial.println(alarmConfiguration->isCompleted());
+
+	logLocation(alarmConfiguration->getLocation());
 }
 
 void loop() {
+
+	Serial.println("SCANNING ENVIRONMENT");
 	Environment environment =
 			environmentMonitorTask->obtainEnvironmentVariables();
 	logEnvironmentVariables(environment);
+	logLocation(alarmConfiguration->getLocation());
 
-	deliveryTask.sendAlert(environment);
+	deliveryTask.sendAlert(environment, alarmConfiguration->getLocation());
 
 	delay(5000);
 
+
+}
+
+void logLocation(Location location){
+
+	Serial.println("logging setted location");
+	Serial.println(location.getLatitude()->getDegree());
+	Serial.println(location.getLatitude()->getMinute());
+
+	const String& second = location.getLatitude()->getSecond();
+	Serial.println(second);
+	const String& cardinal = location.getLatitude()->getCardinalPoint();
+	Serial.println(cardinal);
 
 }
 

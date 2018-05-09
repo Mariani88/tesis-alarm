@@ -19,6 +19,7 @@ public:
 
 	void setLocation(Location* location);
 
+	Location getLocation();
 };
 
 #endif /* ALARMCONFIGURATION_H_ */

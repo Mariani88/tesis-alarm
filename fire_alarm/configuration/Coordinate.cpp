@@ -8,7 +8,7 @@ Coordinate::Coordinate(int degree, int minute, String second,
 	this->cardinalPoint = cardinalPoint;
 }
 
-const String& Coordinate::getCardinalPoint() const {
+const String& Coordinate::getCardinalPoint() const{
 	return cardinalPoint;
 }
 

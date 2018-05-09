@@ -2,7 +2,7 @@
 //This is a automatic generated file
 //Please do not modify this file
 //If you touch this file your change will be overwritten during the next build
-//This file has been generated on 2018-05-06 17:26:27
+//This file has been generated on 2018-05-08 21:42:47
 
 #include "Arduino.h"
 #include "Arduino.h"
@@ -18,6 +18,7 @@
 
 void setup() ;
 void loop() ;
+void logLocation(Location location);
 void logEnvironmentVariables(const Environment& environment) ;
 
 #include "fire_alarm.ino"

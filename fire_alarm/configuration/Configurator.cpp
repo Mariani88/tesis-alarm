@@ -9,11 +9,11 @@ Configurator::Configurator(Visor* visor, Buzzer* buzzer,
 	this->connectionTask = connectionTask;
 }
 
-AlarmConfiguration Configurator::configureAlarm() {
+AlarmConfiguration* Configurator::configureAlarm() {
 
-	AlarmConfiguration alarmConfiguration;
+	AlarmConfiguration* alarmConfiguration = new AlarmConfiguration();
 
-	while (!alarmConfiguration.isCompleted()) {
+	while (!alarmConfiguration->isCompleted()) {
 		if (Serial1.available()) {
 			JsonObject& jsonMessage = deserializeMessage(Serial1.readString());
 			String action = jsonMessage["action"];
@@ -30,7 +30,7 @@ AlarmConfiguration Configurator::configureAlarm() {
 				bool connected = connectionTask->connectToWifi(&wifiNetwork);
 
 				if (connected) {
-					alarmConfiguration.setWifiNetwork(&wifiNetwork);
+					alarmConfiguration->setWifiNetwork(&wifiNetwork);
 					visor->reportWifiConfigured();
 					buzzer->correctConfiguration();
 				}else{
@@ -40,12 +40,12 @@ AlarmConfiguration Configurator::configureAlarm() {
 			}
 
 			if (action.equals(SET_LOCATION)) {
-				Coordinate latitude = deserializeCoordinate(
+				Coordinate* latitude = deserializeCoordinate(
 						jsonMessage["latitude"]);
-				Coordinate longitude = deserializeCoordinate(
+				Coordinate* longitude = deserializeCoordinate(
 						jsonMessage["longitude"]);
-				Location location(&latitude, &longitude);
-				alarmConfiguration.setLocation(&location);
+				Location* location = new Location(latitude, longitude);
+				alarmConfiguration->setLocation(location);
 				visor->reportLocationConfigured();
 				buzzer->correctConfiguration();
 			}
@@ -64,16 +64,16 @@ JsonObject& Configurator::deserializeMessage(String message) {
 	return jsonBuffer.parseObject(message);
 }
 
-Coordinate Configurator::deserializeCoordinate(JsonObject& coordinateJson) {
+Coordinate* Configurator::deserializeCoordinate(JsonObject& coordinateJson) {
 	int degree = coordinateJson["degree"];
 	int minute = coordinateJson["minute"];
-	String second = coordinateJson["second"];
-	String cardinalPoint = coordinateJson["cardinal_point"];
+	const String& second = coordinateJson["second"];
+	const String& cardinalPoint = coordinateJson["cardinal_point"];
 	Serial.println(degree);
 	Serial.println(minute);
-	Serial.println(second);
-	Serial.println(cardinalPoint);
-	return Coordinate(degree, minute, second, cardinalPoint);
+	//Serial.println(second);
+	//Serial.println(cardinalPoint);
+	return new Coordinate(degree, minute, second, cardinalPoint);
 }
 
 Configurator::~Configurator() {

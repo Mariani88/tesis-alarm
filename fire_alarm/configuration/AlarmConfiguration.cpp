@@ -22,6 +22,10 @@ void AlarmConfiguration::setLocation(Location* location) {
 	locationConfigured = true;
 }
 
+Location AlarmConfiguration::getLocation(){
+	return *location;
+}
+
 AlarmConfiguration::~AlarmConfiguration() {
 
 }
