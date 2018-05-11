@@ -2,6 +2,9 @@
 
 TemperatureSensor::TemperatureSensor(int pin) {
 	this->dallasTemperature = new DallasTemperature (new OneWire(pin));
+}
+
+void TemperatureSensor::initialize(){
 	this->dallasTemperature->begin();
 }
 

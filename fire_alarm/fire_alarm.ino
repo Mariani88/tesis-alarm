@@ -24,33 +24,19 @@ Buzzer* buzzer;
 Visor* visor;
 EnvironmentMonitorTask* environmentMonitorTask;
 DeliveryTask deliveryTask;
+ConnectionTask* connectionTask;
 
 void setup() {
-	flameSensor = new FlameSensor(flameAI, flameDI);
-	smokeSensor = new SmokeSensor(smokeAI, smokeDI);
-	temperatureSensor = new TemperatureSensor(temperaturePin);
+	initApplicationContext();
+	initializeDevices();
 
-	environmentMonitorTask = new EnvironmentMonitorTask(temperatureSensor,
-			smokeSensor, flameSensor);
-
-	Serial.begin(9600);     //console
-	Serial1.begin(9600);   //bluetooth
-	Serial2.begin(115200);
-	LiquidCrystal_I2C lcd(0x27, 16, 2);
-	visor = new Visor(&lcd);
-	visor->reportOffLine();
-	buzzer = new Buzzer(2);
-	ConnectionTask connectionTask(visor);
-
-	Configurator configurator(visor, buzzer, &connectionTask);
+	Configurator configurator(visor, buzzer, connectionTask);
 	alarmConfiguration = configurator.configureAlarm();
-	Serial.println(alarmConfiguration->isCompleted());
 
 	logLocation(alarmConfiguration->getLocation());
 }
 
 void loop() {
-
 	Serial.println("SCANNING ENVIRONMENT");
 	Environment environment =
 			environmentMonitorTask->obtainEnvironmentVariables();
@@ -62,6 +48,16 @@ void loop() {
 	delay(5000);
 
 
+}
+
+void initializeDevices(){
+	visor->initialize();
+	visor->reportInitializing();
+	temperatureSensor->initialize();
+	bool initialized = connectionTask->initializeWifi();
+
+	while(!initialized){}
+	visor->reportOffLine();
 }
 
 void logLocation(Location location){
@@ -90,3 +86,16 @@ void logEnvironmentVariables(const Environment& environment) {
 	Serial.println("**************************************************");
 }
 
+void initApplicationContext() {
+	flameSensor = new FlameSensor(flameAI, flameDI);
+	smokeSensor = new SmokeSensor(smokeAI, smokeDI);
+	temperatureSensor = new TemperatureSensor(temperaturePin);
+	environmentMonitorTask = new EnvironmentMonitorTask(temperatureSensor,
+			smokeSensor, flameSensor);
+	Serial.begin(9600); //console
+	Serial1.begin(9600); //bluetooth
+	Serial2.begin(115200); //wifi
+	visor = new Visor(new LiquidCrystal_I2C(0x27, 16, 2));
+	buzzer = new Buzzer(2);
+	connectionTask = new ConnectionTask(visor);
+}

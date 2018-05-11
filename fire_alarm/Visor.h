@@ -10,6 +10,8 @@ class Visor {
 public:
 	Visor(LiquidCrystal_I2C *lcd);
 
+	void initialize();
+
 	void reportWifiConfigured();
 
 	void reportLocationConfigured();
@@ -21,6 +23,10 @@ public:
 	void reportErrorConnection();
 
 	void reportConnecting();
+
+	void reportWifiIsNotInitialized();
+
+	void reportInitializing();
 
 	virtual ~Visor();
 };

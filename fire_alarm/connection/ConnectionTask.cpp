@@ -2,7 +2,14 @@
 
 ConnectionTask::ConnectionTask(Visor* visor) {
 	this->visor = visor;
+}
+
+bool ConnectionTask::initializeWifi(){
 	WiFi.init(&Serial2);
+	bool initialized = WiFi.status() !=WL_NO_SHIELD;
+	if(!initialized) visor->reportWifiIsNotInitialized();
+
+	return initialized;
 }
 
 bool ConnectionTask::connectToWifi(WifiNetwork* wifiNetwork) {

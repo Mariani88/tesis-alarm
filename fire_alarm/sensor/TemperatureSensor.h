@@ -10,6 +10,8 @@ class TemperatureSensor {
 public:
 	TemperatureSensor(int pin);
 
+	void initialize();
+
 	float getEnvironmentTemperature();
 
 	virtual ~TemperatureSensor();
