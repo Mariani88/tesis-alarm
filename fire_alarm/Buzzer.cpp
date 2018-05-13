@@ -21,7 +21,7 @@ void Buzzer::configurationError(){
 }
 
 void Buzzer::fireDetected(){
-	playSound(3000, 100, 500);
+	playSound(2000, 500, 300);
 }
 
 void Buzzer::playSound(int frequence, int delayMillis, int duration) {

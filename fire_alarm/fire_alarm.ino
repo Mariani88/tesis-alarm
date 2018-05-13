@@ -29,10 +29,8 @@ ConnectionTask* connectionTask;
 void setup() {
 	initApplicationContext();
 	initializeDevices();
-
 	Configurator configurator(visor, buzzer, connectionTask);
 	alarmConfiguration = configurator.configureAlarm();
-
 	logLocation(alarmConfiguration->getLocation());
 }
 
@@ -43,11 +41,17 @@ void loop() {
 	logEnvironmentVariables(environment);
 	logLocation(alarmConfiguration->getLocation());
 
-	deliveryTask.sendAlert(environment, alarmConfiguration->getLocation());
+	delay(3000);
+	bool alertSent = false;
 
-	delay(5000);
 
+	while(environment.thereIsAFire()){
+		buzzer->fireDetected();
 
+		if(!alertSent){
+			alertSent = deliveryTask.sendAlert(&environment, alarmConfiguration->getLocation());
+		}
+	}
 }
 
 void initializeDevices(){

@@ -1,10 +1,14 @@
 #include "DeliveryTask.h"
 
+const String SMOKE = "SMOKE";
+const String TEMPERATURE = "TEMPERATURE";
+const String FIRE = "FIRE";
+
 DeliveryTask::DeliveryTask() {
 
 }
 
-void DeliveryTask::sendAlert(const Environment& environment,
+bool DeliveryTask::sendAlert(Environment* environment,
 		Location location) {
 
 	WiFiEspClient client;
@@ -24,6 +28,7 @@ void DeliveryTask::sendAlert(const Environment& environment,
 			retries++;
 		}
 	}
+	return code == successOk;
 }
 
 int DeliveryTask::receiveResponse(WiFiEspClient* client) {
@@ -40,15 +45,18 @@ int DeliveryTask::receiveResponse(WiFiEspClient* client) {
 	return httpCode;
 }
 
-String DeliveryTask::serialize(const Environment& environment,
+String DeliveryTask::serialize(Environment* environment,
 		Location location) {
 	StaticJsonBuffer<600> jsonBuffer;
 	JsonObject& alert = jsonBuffer.createObject();
-	alert["gas"] = environment.getGas();
-	alert["temp"] = environment.getTemperature();
+	alert["gas"] = environment->getGas();
+	alert["temp"] = environment->getTemperature();
 
 	JsonArray& detectionMethod = alert.createNestedArray("det");
-	detectionMethod.add("TEMPERATURE");
+
+	if(environment->isDetectFire()) detectionMethod.add(FIRE);
+	if(environment->isDetectSmoke()) detectionMethod.add(SMOKE);
+	if(environment->highTemperature()) detectionMethod.add(TEMPERATURE);
 
 	logLocation(location);
 

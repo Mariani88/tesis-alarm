@@ -11,12 +11,12 @@ class DeliveryTask {
 public:
 	DeliveryTask();
 
-	void sendAlert(const Environment& environment, Location location);
+	bool sendAlert(Environment* environment, Location location);
 
 	virtual ~DeliveryTask();
 
 private:
-	String serialize(const Environment& environment, Location location);
+	String serialize(Environment* environment, Location location);
 
 	void logLocation(Location location);
 

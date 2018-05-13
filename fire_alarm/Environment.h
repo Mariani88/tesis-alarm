@@ -29,7 +29,15 @@ public:
 		return temperature;
 	}
 
+	bool highTemperature();
+
 	virtual ~Environment();
+
+private:
+	bool fireSmokeAndHighTemperature();
+	bool fireAndHighTemperature();
+	bool smokeAndHighTemperature();
+	bool fireAndSmoke();
 };
 
 #endif /* ENVIRONMENT_H_ */
