@@ -26,6 +26,10 @@ Location AlarmConfiguration::getLocation(){
 	return *location;
 }
 
+WifiNetwork AlarmConfiguration::getWifiNetwork(){
+	return *wifiNetwork;
+}
+
 AlarmConfiguration::~AlarmConfiguration() {
 
 }

@@ -12,9 +12,11 @@ public:
 
 	ConnectionTask(Visor* visor);
 
-	bool ConnectionTask::initializeWifi();
+	bool initializeWifi();
 
 	bool connectToWifi(WifiNetwork* wifiNetwork);
+
+	void checkConnection(WifiNetwork wifiNetwork);
 
 	virtual ~ConnectionTask();
 };

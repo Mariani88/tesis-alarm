@@ -16,7 +16,7 @@ bool DeliveryTask::sendAlert(Environment* environment,
 	int successOk = 200;
 	int code = 100;
 
-	if (!client.connect("192.168.1.6", 8080)) {
+	if (!client.connect("192.168.1.5", 8080)) {
 		Serial.println("Error to connect to server");
 	} else {
 		while (retries < 6 && code != successOk) {
@@ -106,7 +106,7 @@ void DeliveryTask::logLocation(Location location) {
 void DeliveryTask::send(String& content, WiFiEspClient& client) {
 	client.print(
 			String("POST ") + "/alert" + " HTTP/1.1\r\n" + "Host: "
-					+ "192.168.1.6:8080" + "\r\n"
+					+ "192.168.1.5:8080" + "\r\n"
 					+ "Content-Type: application/json\r\n" + "Content-Length: "
 					+ content.length() + "\r\n" + "\r\n" + // This is the extra CR+LF pair to signify the start of a body
 					content + "\n");

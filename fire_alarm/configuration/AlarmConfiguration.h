@@ -20,6 +20,8 @@ public:
 	void setLocation(Location* location);
 
 	Location getLocation();
+
+	WifiNetwork getWifiNetwork();
 };
 
 #endif /* ALARMCONFIGURATION_H_ */

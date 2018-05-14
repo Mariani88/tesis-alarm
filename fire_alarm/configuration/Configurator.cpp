@@ -25,12 +25,12 @@ AlarmConfiguration* Configurator::configureAlarm() {
 				Serial.println(ssid);
 				Serial.println(password);
 				delay(100);
-				WifiNetwork wifiNetwork(ssid, password);
 
-				bool connected = connectionTask->connectToWifi(&wifiNetwork);
+				WifiNetwork* wifiNetwork = new WifiNetwork (ssid, password);
+				bool connected = connectionTask->connectToWifi(wifiNetwork);
 
 				if (connected) {
-					alarmConfiguration->setWifiNetwork(&wifiNetwork);
+					alarmConfiguration->setWifiNetwork(wifiNetwork);
 					visor->reportWifiConfigured();
 					buzzer->correctConfiguration();
 				}else{
@@ -71,8 +71,8 @@ Coordinate* Configurator::deserializeCoordinate(JsonObject& coordinateJson) {
 	const String& cardinalPoint = coordinateJson["cardinal_point"];
 	Serial.println(degree);
 	Serial.println(minute);
-	//Serial.println(second);
-	//Serial.println(cardinalPoint);
+	Serial.println(second);
+	Serial.println(cardinalPoint);
 	return new Coordinate(degree, minute, second, cardinalPoint);
 }
 

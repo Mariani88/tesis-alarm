@@ -49,6 +49,7 @@ void loop() {
 		buzzer->fireDetected();
 
 		if(!alertSent){
+			connectionTask->checkConnection(alarmConfiguration->getWifiNetwork());
 			alertSent = deliveryTask.sendAlert(&environment, alarmConfiguration->getLocation());
 		}
 	}

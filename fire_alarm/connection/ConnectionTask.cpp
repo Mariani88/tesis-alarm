@@ -35,6 +35,14 @@ bool ConnectionTask::connectToWifi(WifiNetwork* wifiNetwork) {
 	return WL_CONNECTED == status;
 }
 
+void ConnectionTask::checkConnection(WifiNetwork wifiNetwork){
+
+	if(WiFi.status() != WL_CONNECTED){
+		Serial.println("Reconnecting before send alert...");
+		connectToWifi(&wifiNetwork);
+	}
+}
+
 ConnectionTask::~ConnectionTask() {
 
 }
