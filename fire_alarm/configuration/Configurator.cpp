@@ -3,10 +3,11 @@
 #include "Coordinate.h"
 
 Configurator::Configurator(Visor* visor, Buzzer* buzzer,
-		ConnectionTask* connectionTask) {
+		ConnectionTask* connectionTask, JsonParser* jsonParser) {
 	this->visor = visor;
 	this->buzzer = buzzer;
 	this->connectionTask = connectionTask;
+	this->jsonParser = jsonParser;
 }
 
 AlarmConfiguration* Configurator::configureAlarm() {
@@ -15,7 +16,7 @@ AlarmConfiguration* Configurator::configureAlarm() {
 
 	while (!alarmConfiguration->isCompleted()) {
 		if (Serial1.available()) {
-			JsonObject& jsonMessage = deserializeMessage(Serial1.readString());
+			JsonObject& jsonMessage = jsonParser->parse(Serial1.readString());
 			String action = jsonMessage["action"];
 
 			if (action.equals(CONNECT)) {
@@ -56,12 +57,6 @@ AlarmConfiguration* Configurator::configureAlarm() {
 	visor->reportAlarmConfigured();
 	buzzer->alarmOnline();
 	return alarmConfiguration;
-}
-
-JsonObject& Configurator::deserializeMessage(String message) {
-	DynamicJsonBuffer jsonBuffer(512);
-	Serial.println(message);
-	return jsonBuffer.parseObject(message);
 }
 
 Coordinate* Configurator::deserializeCoordinate(JsonObject& coordinateJson) {

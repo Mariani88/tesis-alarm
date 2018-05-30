@@ -8,6 +8,7 @@
 #include "EnvironmentMonitorTask.h"
 #include "sensor/TemperatureSensor.h"
 #include "DeliveryTask.h"
+#include "CheckStopAlarmTask.h"
 
 const int flameDI = 41;
 const int flameAI = A10;
@@ -25,11 +26,12 @@ Visor* visor;
 EnvironmentMonitorTask* environmentMonitorTask;
 DeliveryTask deliveryTask;
 ConnectionTask* connectionTask;
+CheckStopAlarmTask* checkStopAlarmTask;
 
 void setup() {
 	initApplicationContext();
 	initializeDevices();
-	Configurator configurator(visor, buzzer, connectionTask);
+	Configurator configurator(visor, buzzer, connectionTask, new JsonParser());
 	alarmConfiguration = configurator.configureAlarm();
 	logLocation(alarmConfiguration->getLocation());
 }
@@ -43,15 +45,18 @@ void loop() {
 
 	delay(3000);
 	bool alertSent = false;
+	bool activatedAlarm = true;
+	//bool activatedAlarm = environment.thereIsAFire();
 
-
-	while(environment.thereIsAFire()){
+	while(activatedAlarm){
 		buzzer->fireDetected();
 
 		if(!alertSent){
 			connectionTask->checkConnection(alarmConfiguration->getWifiNetwork());
 			alertSent = deliveryTask.sendAlert(&environment, alarmConfiguration->getLocation());
 		}
+
+		activatedAlarm = checkStopAlarmTask->shouldContinueAlert();
 	}
 }
 
@@ -103,4 +108,5 @@ void initApplicationContext() {
 	visor = new Visor(new LiquidCrystal_I2C(0x27, 16, 2));
 	buzzer = new Buzzer(2);
 	connectionTask = new ConnectionTask(visor);
+	checkStopAlarmTask = new CheckStopAlarmTask(new JsonParser());
 }

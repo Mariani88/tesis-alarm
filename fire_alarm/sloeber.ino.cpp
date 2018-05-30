@@ -2,7 +2,7 @@
 //This is a automatic generated file
 //Please do not modify this file
 //If you touch this file your change will be overwritten during the next build
-//This file has been generated on 2018-05-13 11:37:44
+//This file has been generated on 2018-05-29 22:29:15
 
 #include "Arduino.h"
 #include "Arduino.h"
@@ -15,6 +15,7 @@
 #include "EnvironmentMonitorTask.h"
 #include "sensor/TemperatureSensor.h"
 #include "DeliveryTask.h"
+#include "CheckStopAlarmTask.h"
 
 void setup() ;
 void loop() ;
