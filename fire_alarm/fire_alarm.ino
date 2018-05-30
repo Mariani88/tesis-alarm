@@ -45,8 +45,7 @@ void loop() {
 
 	delay(3000);
 	bool alertSent = false;
-	bool activatedAlarm = true;
-	//bool activatedAlarm = environment.thereIsAFire();
+	bool activatedAlarm = environment.thereIsAFire();
 
 	while(activatedAlarm){
 		buzzer->fireDetected();
