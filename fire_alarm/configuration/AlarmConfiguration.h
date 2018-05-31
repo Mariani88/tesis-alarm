@@ -3,11 +3,13 @@
 
 #include "WifiNetwork.h"
 #include "Location.h"
+#include "UrlServer.h"
 
 class AlarmConfiguration {
 
 	WifiNetwork* wifiNetwork;
 	Location* location;
+	UrlServer* urlServer;
 
 public:
 	AlarmConfiguration();
@@ -19,9 +21,13 @@ public:
 
 	void setLocation(Location* location);
 
+	void setUrlServer(UrlServer* urlServer);
+
 	Location getLocation();
 
 	WifiNetwork getWifiNetwork();
+
+	UrlServer getUrlServer();
 };
 
 #endif /* ALARMCONFIGURATION_H_ */

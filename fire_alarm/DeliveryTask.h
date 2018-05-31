@@ -4,6 +4,7 @@
 #include "WString.h"
 #include "ArduinoJson.h"
 #include "configuration/Location.h"
+#include "configuration/UrlServer.h"
 #include "WiFiEspClient.h"
 
 class DeliveryTask {
@@ -11,7 +12,7 @@ class DeliveryTask {
 public:
 	DeliveryTask();
 
-	bool sendAlert(Environment* environment, Location location);
+	bool sendAlert(Environment* environment, Location location, UrlServer urlServer);
 
 	virtual ~DeliveryTask();
 
@@ -25,7 +26,7 @@ private:
 	JsonObject& parseCoordinate(StaticJsonBuffer<600>* jsonBuffer,
 			const Coordinate* coordinate);
 
-	void send(String& content, WiFiEspClient& client);
+	void send(String& content, WiFiEspClient& client, UrlServer urlServer);
 };
 
 #endif /* DELIVERYTASK_H_ */

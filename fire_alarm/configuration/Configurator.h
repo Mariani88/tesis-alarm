@@ -7,6 +7,7 @@
 #include "../Buzzer.h"
 #include "../connection/ConnectionTask.h"
 #include "../message/JsonParser.h"
+#include "UrlServer.h"
 
 class Configurator {
 	Visor *visor;

@@ -2,14 +2,16 @@
 
 bool wifiConfigurated;
 bool locationConfigured;
+bool urlServerConfigured;
 
-AlarmConfiguration::AlarmConfiguration(){
+AlarmConfiguration::AlarmConfiguration() {
 	this->wifiNetwork = NULL;
 	this->location = NULL;
+	this->urlServer = NULL;
 }
 
 bool AlarmConfiguration::isCompleted() {
-	return wifiConfigurated && locationConfigured;
+	return wifiConfigurated && locationConfigured && urlServerConfigured;
 }
 
 void AlarmConfiguration::setWifiNetwork(WifiNetwork* wifiNetwork) {
@@ -22,12 +24,21 @@ void AlarmConfiguration::setLocation(Location* location) {
 	locationConfigured = true;
 }
 
-Location AlarmConfiguration::getLocation(){
+Location AlarmConfiguration::getLocation() {
 	return *location;
 }
 
-WifiNetwork AlarmConfiguration::getWifiNetwork(){
+WifiNetwork AlarmConfiguration::getWifiNetwork() {
 	return *wifiNetwork;
+}
+
+void AlarmConfiguration::setUrlServer(UrlServer* urlServer) {
+	this->urlServer = urlServer;
+	urlServerConfigured = true;
+}
+
+UrlServer AlarmConfiguration::getUrlServer() {
+	return *this->urlServer;
 }
 
 AlarmConfiguration::~AlarmConfiguration() {

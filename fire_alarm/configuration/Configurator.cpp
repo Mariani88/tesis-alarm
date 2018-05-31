@@ -50,6 +50,12 @@ AlarmConfiguration* Configurator::configureAlarm() {
 				visor->reportLocationConfigured();
 				buzzer->correctConfiguration();
 			}
+
+			if(action.equals(SET_SERVER_URL)){
+				String ip = jsonMessage["ip"];
+				int port = jsonMessage["port"];
+				alarmConfiguration->setUrlServer(new UrlServer(ip, port));
+			}
 		}
 	}
 

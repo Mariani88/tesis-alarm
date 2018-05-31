@@ -9,19 +9,19 @@ DeliveryTask::DeliveryTask() {
 }
 
 bool DeliveryTask::sendAlert(Environment* environment,
-		Location location) {
+		Location location, UrlServer urlServer) {
 
 	WiFiEspClient client;
 	int retries = 0;
 	int successOk = 200;
 	int code = 100;
 
-	if (!client.connect("192.168.1.5", 8080)) {
+	if (!client.connect(urlServer.getIp().c_str(), urlServer.getPort())) {
 		Serial.println("Error to connect to server");
 	} else {
 		while (retries < 6 && code != successOk) {
 			String content = serialize(environment, location);
-			send(content, client);
+			send(content, client, urlServer);
 			delay(4000);
 			code = receiveResponse(&client);
 			client.stop();
@@ -103,10 +103,13 @@ void DeliveryTask::logLocation(Location location) {
 	Serial.println(location.getLongitude()->getCardinalPoint());
 }
 
-void DeliveryTask::send(String& content, WiFiEspClient& client) {
+void DeliveryTask::send(String& content, WiFiEspClient& client, UrlServer urlServer) {
+
+	String url = urlServer.getIp()+ ":" + String(urlServer.getPort());
+
 	client.print(
 			String("POST ") + "/alert" + " HTTP/1.1\r\n" + "Host: "
-					+ "192.168.1.5:8080" + "\r\n"
+					+ url + "\r\n"
 					+ "Content-Type: application/json\r\n" + "Content-Length: "
 					+ content.length() + "\r\n" + "\r\n" + // This is the extra CR+LF pair to signify the start of a body
 					content + "\n");

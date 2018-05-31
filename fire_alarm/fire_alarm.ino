@@ -52,7 +52,7 @@ void loop() {
 
 		if(!alertSent){
 			connectionTask->checkConnection(alarmConfiguration->getWifiNetwork());
-			alertSent = deliveryTask.sendAlert(&environment, alarmConfiguration->getLocation());
+			alertSent = deliveryTask.sendAlert(&environment, alarmConfiguration->getLocation(), alarmConfiguration->getUrlServer());
 		}
 
 		activatedAlarm = checkStopAlarmTask->shouldContinueAlert();
