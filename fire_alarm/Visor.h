@@ -16,6 +16,8 @@ public:
 
 	void reportLocationConfigured();
 
+	void reportUrlServerConfigured();
+
 	void reportAlarmConfigured();
 
 	void reportOffLine();

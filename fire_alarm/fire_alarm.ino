@@ -12,7 +12,6 @@
 
 const int flameDI = 41;
 const int flameAI = A10;
-
 const int smokeAI = A11;
 const int smokeDI = 39;
 const int temperaturePin = A0;

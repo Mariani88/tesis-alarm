@@ -11,12 +11,17 @@ void Visor::initialize() {
 
 void Visor::reportWifiConfigured() {
 	lcd->setCursor(0, 0);
-	lcd->print("WIFI OK         ");
+	lcd->print("WIFI OK");
 }
 
 void Visor::reportLocationConfigured() {
 	lcd->setCursor(0, 1);
 	lcd->print("LOCATION OK     ");
+}
+
+void Visor::reportUrlServerConfigured(){
+	lcd->setCursor(9, 0);
+	lcd->print("URLS OK ");
 }
 
 void Visor::reportAlarmConfigured() {
@@ -26,7 +31,9 @@ void Visor::reportAlarmConfigured() {
 
 void Visor::reportOffLine() {
 	lcd->clear();
-	lcd->print("Wifi offline");
+	lcd->print("Wifi NC");
+	lcd->setCursor(9, 0);
+	lcd->print("urlS NC");
 	lcd->setCursor(0, 1);
 	lcd->print("Location offline");
 }
