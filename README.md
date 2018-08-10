@@ -11,7 +11,17 @@ La aplicacion Android que configura esta alarma se encuentra en el siguiente rep
 
 La API Rest se encuentra alojada en el siguiente repositorio: https://github.com/Mariani88/tesis-server
 
-La aplicación mobile se encuentra alojada en el siguiente repositorio: https://github.com/Mariani88/tesis-android
+La aplicación mobile receptora de alertas se encuentra alojada en el siguiente repositorio: https://github.com/Mariani88/tesis-android
 
 
 
+
+
+Como clonar y compilar el proyecto proyecto
+
+Luego de clonar este repositorio, se deben incorporar las librerias requeridas para la compilacion. Dado que no se incorporó un gestor de dependencias, pueden descargarse dichas librerías manualmente o a través del entorno de desarrollo oficial de Arduino. 
+Para abrir el proyecto se recomienda usar otro entorno de desarrollo. Para este proyecto se usó Sloeber: http://www.baeyens.it/eclipse/
+
+La idea sería la siguiente, instalar el IDE oficial de Arduino: https://www.arduino.cc/en/Main/Software y descargar las dependencias. Luego abrir el proyecto con Sloeber e incluir dichas librerías al proyecto.
+
+Por último, puede utilizarse Sloeber para compilar el proyecto.
