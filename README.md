@@ -15,7 +15,7 @@ La aplicación mobile receptora de alertas se encuentra alojada en el siguiente 
 
 ------------------------------------------------------------------------------------------------------------------------------
 
-- Como clonar y compilar el proyecto proyecto
+- Como clonar y compilar el proyecto
 
 Luego de clonar este repositorio, se deben incorporar las librerias requeridas para la compilacion. Dado que no se incorporó un gestor de dependencias, pueden descargarse dichas librerías manualmente o a través del entorno de desarrollo oficial de Arduino. 
 Para abrir el proyecto se recomienda usar otro entorno de desarrollo. Para este proyecto se usó Sloeber: http://www.baeyens.it/eclipse/
