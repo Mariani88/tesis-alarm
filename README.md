@@ -25,11 +25,11 @@ Por último, puede utilizarse Sloeber para compilar el proyecto.
 
 Las librerías son las siguientes:
 
-DallasTempperature: https://github.com/milesburton/Arduino-Temperature-Control-Library
-LiquidCrystal_I2C: https://github.com/fdebrabander/Arduino-LiquidCrystal-I2C-library
-Wire: https://www.arduino.cc/en/Reference/Wire
-MAX31850_OneWire: https://github.com/adafruit/MAX31850_OneWire
-WiFiEsp:https://github.com/bportaluri/WiFiEsp
++ DallasTempperature: https://github.com/milesburton/Arduino-Temperature-Control-Library
++ LiquidCrystal_I2C: https://github.com/fdebrabander/Arduino-LiquidCrystal-I2C-library
++ Wire: https://www.arduino.cc/en/Reference/Wire
++ MAX31850_OneWire: https://github.com/adafruit/MAX31850_OneWire
++ WiFiEsp:https://github.com/bportaluri/WiFiEsp
 
 
 
