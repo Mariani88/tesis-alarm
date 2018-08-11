@@ -13,6 +13,7 @@ La API Rest se encuentra alojada en el siguiente repositorio: https://github.com
 
 La aplicación mobile receptora de alertas se encuentra alojada en el siguiente repositorio: https://github.com/Mariani88/tesis-android
 
+------------------------------------------------------------------------------------------------------------------------------
 
 - Como clonar y compilar el proyecto proyecto
 
