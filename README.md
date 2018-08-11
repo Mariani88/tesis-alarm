@@ -1,4 +1,4 @@
-# tesis-alarm
+# tesis-Alarma
 
 - Sobre esta aplicación
 
