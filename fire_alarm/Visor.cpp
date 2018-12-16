@@ -11,7 +11,7 @@ void Visor::initialize() {
 
 void Visor::reportWifiConfigured() {
 	lcd->setCursor(0, 0);
-	lcd->print("WIFI OK");
+	lcd->print("WIFI OK         ");
 }
 
 void Visor::reportLocationConfigured() {

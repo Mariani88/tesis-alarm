@@ -41,7 +41,7 @@ void loop() {
 			environmentMonitorTask->obtainEnvironmentVariables();
 	logEnvironmentVariables(environment);
 	logLocation(alarmConfiguration->getLocation());
-
+	logConnectionStatus(connectionTask->connectionStatus());
 	delay(3000);
 	bool alertSent = false;
 	bool activatedAlarm = environment.thereIsAFire();
@@ -68,8 +68,12 @@ void initializeDevices(){
 	visor->reportOffLine();
 }
 
-void logLocation(Location location){
+void logConnectionStatus(String status){
+	Serial.print("CONNECTION STATUS: ");
+	Serial.println(status);
+}
 
+void logLocation(Location location){
 	Serial.println("logging setted location");
 	Serial.println(location.getLatitude()->getDegree());
 	Serial.println(location.getLatitude()->getMinute());
@@ -78,7 +82,6 @@ void logLocation(Location location){
 	Serial.println(second);
 	const String& cardinal = location.getLatitude()->getCardinalPoint();
 	Serial.println(cardinal);
-
 }
 
 void logEnvironmentVariables(const Environment& environment) {

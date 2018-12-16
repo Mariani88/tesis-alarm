@@ -16,6 +16,9 @@ bool DeliveryTask::sendAlert(Environment* environment,
 	int successOk = 200;
 	int code = 100;
 
+	Serial.println(urlServer.getIp());
+	Serial.println(urlServer.getPort());
+
 	if (!client.connect(urlServer.getIp().c_str(), urlServer.getPort())) {
 		Serial.println("Error to connect to server");
 	} else {
@@ -24,10 +27,15 @@ bool DeliveryTask::sendAlert(Environment* environment,
 			send(content, client, urlServer);
 			delay(4000);
 			code = receiveResponse(&client);
-			client.stop();
 			retries++;
 		}
+
+		client.stop();
 	}
+
+	delay(3000);
+	Serial.println("Client status: " + client.status());
+
 	return code == successOk;
 }
 
@@ -110,6 +118,7 @@ void DeliveryTask::send(String& content, WiFiEspClient& client, UrlServer urlSer
 	client.print(
 			String("POST ") + "/alert" + " HTTP/1.1\r\n" + "Host: "
 					+ url + "\r\n"
+					+ "Connection: close\r\n"
 					+ "Content-Type: application/json\r\n" + "Content-Length: "
 					+ content.length() + "\r\n" + "\r\n" + // This is the extra CR+LF pair to signify the start of a body
 					content + "\n");

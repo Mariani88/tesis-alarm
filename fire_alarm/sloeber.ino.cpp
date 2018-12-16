@@ -2,7 +2,7 @@
 //This is a automatic generated file
 //Please do not modify this file
 //If you touch this file your change will be overwritten during the next build
-//This file has been generated on 2018-05-31 22:15:29
+//This file has been generated on 2018-12-15 15:53:45
 
 #include "Arduino.h"
 #include "Arduino.h"
@@ -20,6 +20,7 @@
 void setup() ;
 void loop() ;
 void initializeDevices();
+void logConnectionStatus(String status);
 void logLocation(Location location);
 void logEnvironmentVariables(const Environment& environment) ;
 void initApplicationContext() ;

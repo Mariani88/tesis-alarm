@@ -3,6 +3,7 @@
 #include "../configuration/WifiNetwork.h"
 #include "WiFiEsp.h"
 #include "../Visor.h"
+#include "WString.h"
 
 class ConnectionTask {
 
@@ -17,6 +18,8 @@ public:
 	bool connectToWifi(WifiNetwork* wifiNetwork);
 
 	void checkConnection(WifiNetwork wifiNetwork);
+
+	String connectionStatus();
 
 	virtual ~ConnectionTask();
 };
