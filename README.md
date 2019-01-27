@@ -7,11 +7,12 @@ Esta alarma monitorea las variables del entorno y envía una alerta de incendio 
 Para poder funcionar, requiere una serie de configuraciones, las cuales pueden ser proporcionadas por una aplicación Android, desarrollada especificamente para este propósito.
 
 
-La aplicacion Android que configura esta alarma se encuentra en el siguiente repositorio: https://github.com/Mariani88/tesis-android-config
+El conjunto de aplicaciones se encuentra en los siguientes repositorios:
 
-La API Rest se encuentra alojada en el siguiente repositorio: https://github.com/Mariani88/tesis-server
-
-La aplicación mobile receptora de alertas se encuentra alojada en el siguiente repositorio: https://github.com/Mariani88/tesis-android
+Software de la alarma: https://github.com/Mariani88/tesis-alarm
+La aplicacion Android que configura la alarma: https://github.com/Mariani88/tesis-android-config
+La API Rest que recibe las alertas: https://github.com/Mariani88/tesis-server
+La aplicación mobile receptora de alertas: https://github.com/Mariani88/tesis-android
 
 ------------------------------------------------------------------------------------------------------------------------------
 
